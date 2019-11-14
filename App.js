@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, Button, Text, View } from 'react-native';
+import { StyleSheet, Button, Text, View, FlatList } from 'react-native';
 
 import TodoInput from './components/inputComponent'
+import TodoList from './components/listComponent'
 
 export default function App() {
 
@@ -15,6 +16,7 @@ export default function App() {
     ])
     setModalInput(false)
   }
+
 
   const closeModal = () => {
     setModalInput(false)
@@ -31,6 +33,15 @@ export default function App() {
         visible={ModalInput}
         AddData={addTodo}
         closeModal={closeModal}
+      />
+      <View style={{ marginTop: 20 }}></View>
+      <FlatList
+        keyExtractor={(item, index) => item.key}
+        data={Todos}
+        renderItem={itemData =>
+          <TodoList
+            title={itemData.item.value}
+          />}
       />
     </View>
   );
