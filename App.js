@@ -1,5 +1,7 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Button, Text, View } from 'react-native';
+
+import TodoInput from './components/inputComponent'
 
 export default function App() {
 
@@ -11,17 +13,25 @@ export default function App() {
       ...currentTodos,
       { key: Math.random().toString(), value: todo }
     ])
-    setIsAddMode(false)
+    setModalInput(false)
+  }
+
+  const closeModal = () => {
+    setModalInput(false)
   }
 
   return (
     <View style={styles.container}>
-      <Button onPress={() => setModalInput(true)} title="Tambah Data" />
-
-      <TodoInput
-        visible={setModalInput}
+      <Button onPress={() => 
+        setModalInput(true)} 
+        title="Tambah Data" 
       />
 
+      <TodoInput
+        visible={ModalInput}
+        AddData={addTodo}
+        closeModal={closeModal}
+      />
     </View>
   );
 }
