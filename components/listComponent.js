@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native'
 
 const TodoList = props => {
+
     return (
-        <TouchableOpacity activeOpacity={0.8}>
+        <TouchableOpacity 
+            activeOpacity={0.8} 
+            onPress={props.deleteTodo.bind(this, props.itemKey)}>
+            
             <View style={styles.cardStyle}>
-                <Text>{props.title}</Text>
+                <Text style={styles.textTitle}>{props.title}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -14,10 +18,14 @@ const TodoList = props => {
 const styles = StyleSheet.create({
     cardStyle: {
         padding: 10,
-        marginTop: 10,
-        backgroundColor: '#ccc',
-        borderColor: 'black',
-        borderWidth: 1
+        marginTop: 12,
+        backgroundColor: '#ffa333',
+        borderRadius: 5
+    }, 
+    textTitle:{
+        color: "white",
+        fontWeight: "300",
+        fontSize: 16
     }
 })
 

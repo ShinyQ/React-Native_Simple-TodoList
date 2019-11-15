@@ -17,6 +17,11 @@ export default function App() {
     setModalInput(false)
   }
 
+  const removeTodo = todoKey => {
+    setTodos(currentTodos => {
+      return currentTodos.filter((todo) => todo.key != todoKey)
+    })
+  }
 
   const closeModal = () => {
     setModalInput(false)
@@ -24,9 +29,12 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Button onPress={() => 
+
+      <Text style={styles.headerText}> Todo List App</Text>
+
+      <Button color="#ffa333" onPress={() => 
         setModalInput(true)} 
-        title="Tambah Data" 
+        title="Tambah ToDo" 
       />
 
       <TodoInput
@@ -35,12 +43,16 @@ export default function App() {
         closeModal={closeModal}
       />
       <View style={{ marginTop: 20 }}></View>
+      <Text style={styles.bodyText}> List Todo Anda :</Text>
+     
       <FlatList
         keyExtractor={(item, index) => item.key}
         data={Todos}
         renderItem={itemData =>
           <TodoList
+            itemKey={itemData.item.key}
             title={itemData.item.value}
+            deleteTodo={removeTodo}
           />}
       />
     </View>
@@ -51,5 +63,17 @@ const styles = StyleSheet.create({
   container: {
     padding: 30,
     paddingTop: 50
+  },
+  headerText: {
+    fontSize: 25,
+    fontWeight: "600",
+    color: 'black',
+    marginBottom: 20
+  },
+  bodyText: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: 'black',
+    marginTop: 20
   },
 });
